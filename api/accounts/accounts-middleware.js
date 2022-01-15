@@ -11,3 +11,11 @@ exports.checkAccountNameUnique = (req, res, next) => {
 exports.checkAccountId = (req, res, next) => {
   // DO YOUR MAGIC
 }
+
+const logger = (req, res, next) => {
+    console.log(`[${req.method}]  ${req.url} ${new Date()}`)
+    console.log(`This is ${req.body}`)
+    next()
+}
+
+module.exports = logger
