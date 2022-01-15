@@ -18,20 +18,6 @@ server.use('*', (req, res, next) => {
     })
 })
 
-server.use((err, req, res, next) => { // eslint-disable-line
-    console.log('disaster!')
-    res.status(err.status || 500).json({
-        message: `The Horror: ${err.message}`,
-        stack: err.stack
-    })
-})
-
-
-
-
-
-
-
 
 
 module.exports = server;

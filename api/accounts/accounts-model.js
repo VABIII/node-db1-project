@@ -1,7 +1,7 @@
 const db = require('../../data/db-config')
 
 const getAll = async () => {
-  return db('Accounts')
+  return db('accounts')
 }
 
 const getById = async (id) => {
