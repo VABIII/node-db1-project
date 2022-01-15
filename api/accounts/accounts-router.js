@@ -41,9 +41,10 @@ router.put('/:id', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
     const {id} = req.params
 
-    Accounts.deleteById(id)
-        .then(deleted => {
-            res.json(deleted)
+    Accounts.getById(id)
+        .then(account => {
+            res.json(account)
+            return Accounts.deleteById(id)
         })
         .catch(next)
 })
