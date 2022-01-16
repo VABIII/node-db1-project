@@ -25,6 +25,53 @@ router.post('/', (req, res, next) =>{
         .catch(next)
 })
 
+router.put('/:id', (req, res, next) =>{
+    Accounts.updateById(req.params.id, req.body)
+        .then(updated => {
+            res.json(updated)
+        })
+        .catch(next)
+})
 
+router.delete('/:id', (req, res, next) => {
+    Accounts.deleteById(req.params.id)
+        .then(() => {
+            res.json(req.account)
+        })
+        .catch(next)
+})
+
+router.use((err, req, res, next) => { // eslint-disable-line
+    res.status(err.status || 500).json({
+        message: err.message
+    })
+})
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
