@@ -5,7 +5,7 @@ const getAll = async () => {
 }
 
 const getById = async (id) => {
-  return db('accounts').where('id', id)
+  return db('accounts').where('id', id).first()
 }
 
 const create = async (account) => {
@@ -23,10 +23,15 @@ const deleteById = async (id) => {
   return db('accounts').where('id', id).del();
 }
 
+const checkName = async () => {
+  return db('accounts').where('name', 'Vern');
+}
+
 module.exports = {
   getAll,
   getById,
   create,
   updateById,
   deleteById,
+  checkName
 }
