@@ -1,11 +1,11 @@
 const Accounts = require('./accounts-model')
 const db = require('../../data/db-config')
 
-.exports.checkAccountPayload = (req, res, next) => {
+exports.checkAccountPayload = (req, res, next) => {
     const error = {status: 400}
-    const { name, budget } = req.body
+    const {name, budget} = req.body
 
-    if(name === undefined || budget === undefined) {
+    if (name === undefined || budget === undefined) {
         error.message = 'name and budget are required'
     } else if (name.trim().length < 3 || name.trim().length > 100) {
         error.message = 'name of account must be between 3 and 100'
@@ -15,9 +15,22 @@ const db = require('../../data/db-config')
         error.message = 'budget of account is too large or too small'
     }
 
-    if(error.message) {
+    if (error.message) {
         next(error)
-    } else {next()}
+    } else {
+        next()
+    }
+}
+
+exports.checkAccountNameUnique = (req, res, next) => {
+    const name = req.body.name.trim().first()
+    Accounts.checkName(name)
+        .then(name => {
+            if(name) {
+                next({status: 400, message: 'that name is taken'})
+            } else(next())
+        })
+        .catch(next)
 }
 
 

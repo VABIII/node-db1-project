@@ -1,10 +1,10 @@
 const db = require('../../data/db-config')
 
-const getAll = async () => {
+const getAll = () => {
   return db('accounts')
 }
 
-const getById = async (id) => {
+const getById = (id) => {
   return db('accounts').where('id', id).first()
 }
 
@@ -23,9 +23,11 @@ const deleteById = async (id) => {
   return db('accounts').where('id', id).del();
 }
 
-const checkName = async () => {
-  return db('accounts').where('name', 'Vern');
+const checkName = name => {
+  return db('accounts').where('name', name).first();
 }
+
+
 
 module.exports = {
   getAll,
