@@ -9,9 +9,8 @@ const getById = (id) => {
 }
 
 const create = async (account) => {
-  const [accountId] = await db('accounts').insert(account);
-  console.log(accountId)
-  return getById(accountId)
+  const [id] = await db('accounts').insert(account);
+  return getById(id)
 }
 
 const updateById = async (id, account) => {
