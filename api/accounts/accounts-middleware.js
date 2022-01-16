@@ -33,6 +33,23 @@ exports.checkAccountNameUnique = (req, res, next) => {
         .catch(next)
 }
 
+exports.checkAccountId = (req, res, next) => {
+    const {id} = req.params.id
+
+    Accounts.getById(id)
+        .then(account => {
+            if(!account) {
+                next({
+                    status: 404,
+                    message: "account not found"
+                })
+            } else{
+                req.account = account
+                next()
+            }
+        })
+        .catch(next)
+}
 
 
 exports.logger = (req, res, next) => {
